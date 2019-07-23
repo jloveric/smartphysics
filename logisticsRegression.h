@@ -1,7 +1,0 @@
-#ifndef __LOGISTICS_REGRESSION
-#define __LOGISTICS_REGRESSION
-
-
-
-
-#endif
