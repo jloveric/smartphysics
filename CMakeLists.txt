@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.15.0)
+project (kuiper)
+include_directories(include)
+file(GLOB SOURCES "src/*.cc")
+add_executable(kuiper ${SOURCES})
