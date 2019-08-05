@@ -37,7 +37,7 @@ class UpdaterAdvectionEquation : public UpdaterIfc<Graph1D> {
     //OK, I'm gonna cheat for demo purposes and just shift the data
     auto head = data[0];
 
-
+    
   }
 
 };
