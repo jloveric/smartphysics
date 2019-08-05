@@ -1,5 +1,6 @@
 # kuiper
-Computational science and engineering algorithms in c++17.  This will use c++20 modules as soon as they are released.
+This is work towards a "Smart Physics" simulation tool.  Physical models/simulations are used to train machine learning algorithms which
+can then be used to perform simulations faster, or act as subgrid scale models for those simulations so that they can be performed faster and at higher resolution.
 
 # Build in Docker
 
