@@ -11,7 +11,7 @@ class UpdaterIfc {
   UpdaterIfc() {
   }
 
-  virtual void update(const GRAPH* Graph, const DataSet* data) {
+  virtual Data update(const GRAPH& Graph, const DataSet& data) {
   }
 };
 
@@ -21,23 +21,28 @@ class UpdaterNBody : public UpdaterIfc<Graph1D> {
   UpdaterNBody() { 
   }
 
-  void update(const Graph1D* Graph, const DataSet* data) override {
+  Data update(const Graph1D& Graph, const DataSet& data) override {
 
   }
 };
 
-
 class UpdaterAdvectionEquation : public UpdaterIfc<Graph1D> {
   public :
   UpdaterAdvectionEquation() {
-
   }
 
-  void update(const Graph1D* Graph, const DataSet* data) override {
+  Data update(const Graph1D& Graph, const DataSet& data) override {
     //OK, I'm gonna cheat for demo purposes and just shift the data
-    auto head = data[0];
+    Data head;
+    head.resize(data[0].size());
+    auto tSize = head.size();
 
-    
+    //rotate the array - yes, periodic boundary conditions shift by one unit
+    for(auto i=0; i < tSize; i++) {
+      head[(i+1)%tSize]=data[0][i];
+    }
+
+    return head;
   }
 
 };
