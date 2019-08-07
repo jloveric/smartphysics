@@ -39,6 +39,8 @@ class ApplyLinearLeastSquares : public ApplyModelIfc {
 
 class ApplyNearestNeighbor : public ApplyModelIfc {
   public :
+  ApplyNearestNeighbor(){}
+
   void setModel(NearestNeighborModel* thisModel) {
     model=thisModel;
   }

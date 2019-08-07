@@ -10,7 +10,9 @@
 **/CTestTestfile.cmake
 **/CPackConfig.cmake
 **/CPackSourceConfig.cmake
-kuiper
+**/smartphysics
+**/html
+**/latex
 
 test/test*
 !test/test*.cc

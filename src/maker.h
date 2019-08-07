@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 /**
  * Base class for creating new objects
@@ -32,6 +33,12 @@ class MakerMap
 {
   public:
   static std::map<std::string, MakerBase<TBASE>*> map;
+
+  virtual ~MakerMap() {
+    std::for_each(map.begin(), map.end(), [] (auto element) {
+      delete element.second;
+    });
+  }
 };
 
 template <class TBASE>
@@ -44,8 +51,6 @@ std::map<std::string, MakerBase<TBASE>*> MakerMap<TBASE>::map;
 template <class TBASE>
 TBASE* getNew(std::string name)
 {
-  NetLogger netLog;
-
   if (MakerMap<TBASE>::map.find(name) == MakerMap<TBASE>::map.end()) {
 
     for (auto it : MakerMap<TBASE>::map) {
@@ -58,8 +63,8 @@ TBASE* getNew(std::string name)
 
   TBASE* result = MakerMap<TBASE>::map[name]->get();
   if (result == NULL) {
-    BOOST_LOG(netLog.getLogger()) << "getNew object name " << name << " not found ";
-    netLog.logAndThrow("Error");
+    std::cout << "getNew object name " << name << " not found\n";
+    throw;
   }
   return result;
 }

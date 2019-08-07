@@ -4,6 +4,13 @@
 
 #include <iostream>
 
+#include "registry.h"
+
 int main(void) {
-    //std::cout << "this works.";
+
+  registerModels();
+  registerLearners();
+  registerApplys();
+  
+  std::cout << "this works.";
 }
