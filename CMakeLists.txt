@@ -22,3 +22,4 @@ add_executable(smartphysics src/main.cc)
 
 enable_testing()
 add_test(testNearestNeighbor test/testNearestNeighbor)
+add_test(testRegistry test/testRegistry)

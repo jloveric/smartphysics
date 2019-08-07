@@ -11,7 +11,8 @@ include_directories(${Boost_INCLUDE_DIRS})
 message(STATUS "Source Boost include directories: " ${Boost_INCLUDE_DIRS})
 message(STATUS "Source Boost libs: " ${Boost_LIBRARIES})
 
-set(CMAKE_CXX_FLAGS "-O3 -march=native --std=c++17 ${CMAKE_CXX_FLAGS}")
+#set(CMAKE_CXX_FLAGS "-O3 -march=native --std=c++17 ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "-g -march=native --std=c++17 ${CMAKE_CXX_FLAGS}")
 add_library (
   smart
   SHARED

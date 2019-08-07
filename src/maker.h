@@ -33,16 +33,19 @@ class MakerMap
 {
   public:
   static std::map<std::string, MakerBase<TBASE>*> map;
-
-  virtual ~MakerMap() {
-    std::for_each(map.begin(), map.end(), [] (auto element) {
-      delete element.second;
-    });
-  }
 };
+
 
 template <class TBASE>
 std::map<std::string, MakerBase<TBASE>*> MakerMap<TBASE>::map;
+
+template <class TBASE>
+void clearMakerMap() {
+  std::for_each(MakerMap<TBASE>::map.begin(), MakerMap<TBASE>::map.end(), [] (auto element) {
+    delete element.second;
+    element.second = nullptr;
+  });
+}
 
 /**
  * Simple function for retrieving and object
@@ -62,7 +65,7 @@ TBASE* getNew(std::string name)
   }
 
   TBASE* result = MakerMap<TBASE>::map[name]->get();
-  if (result == NULL) {
+  if (result == nullptr) {
     std::cout << "getNew object name " << name << " not found\n";
     throw;
   }

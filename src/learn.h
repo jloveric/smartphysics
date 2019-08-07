@@ -9,8 +9,9 @@ class LearnerIfc {
   LearnerIfc() {
   }
 
-  virtual void Learn(const DataSet& testSet, const DataSet& trainSet) {
+  virtual void learn(const DataSet& testSet, const DataSet& trainSet) {
   }
+
   private:
   //Copy constructor is private so I don't have to deal with accidental copy!
   LearnerIfc( const LearnerIfc &obj){}
@@ -24,16 +25,26 @@ class LearnLinearLeastSquares : public LearnerIfc {
 
 class LearnNearestNeighbor : public LearnerIfc {
   public:
-    LearnNearestNeighbor() {}
+    LearnNearestNeighbor() {model=nullptr;}
 
-    void Learn(const DataSet& features, const DataSet& output) override {
+    void learn(const DataSet& features, const DataSet& output) override {
+      
       //Fortunately learning for this model is the simplest possible!
-      model.setExamples(features, output);
+      if(model) {
+        model->setExamples(features, output);
+      } else {
+        std::cout << "you need to set the model\n";
+      }
+    }
+
+    void setModel(NearestNeighborModel* tModel) {
+      model = tModel;
     }
 
   private:
 
-  NearestNeighborModel model;
+  //Should not be deleted
+  NearestNeighborModel* model;
 };
 
 #endif

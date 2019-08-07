@@ -46,11 +46,9 @@ class ApplyNearestNeighbor : public ApplyModelIfc {
   }
 
   Data apply(Data& v) override {
-    //Run through the examples in the model and figure out which one
-    //is closest.  Compute the cosine similarity, rescale the coefficients
-    //and return the sum as the result.
+    //Eventually we'll use inverse distance weighting, though in this case we'll use
+    //genuine nearest neighbor based on cosine distance
 
-    //check that the model is not null;
     if(!model) { 
       std::cout << "model has not been defined in ApplyNearestNeighbor or is null";
       throw;
@@ -59,26 +57,31 @@ class ApplyNearestNeighbor : public ApplyModelIfc {
     auto features = model->getExampleFeatures();
     auto output = model->getExampleOutput();
 
+    if(!features.size()) {
+      std::cout << "There are no features!\n";
+      throw;
+    }
+
     Data similarity;
     similarity.resize(features.size());
-    
-    //Not totally sure this is what I want.
-    double absSum = 0;
 
     double vv = dotProduct(v,v);
 
-    for(auto i=0; i<features.size(); i++) {
-      similarity[i] = dotProduct(features[i], v)/vv;
-      absSum += std::abs(similarity[i]); 
-    }
+    double closestValue = 1.0-dotProduct(features[0], v)/vv;
+    int closestIndex = 0;
 
-    for(auto i=0; i<similarity.size(); i++) {
-      similarity[i]=similarity[i]/absSum;
+    for(auto i=1; i<features.size(); i++) {
+      auto val = 1.0-dotProduct(features[i], v)/vv;
+      if( std::abs(val)<std::abs(closestValue) ) {
+        closestValue = val;
+        closestIndex = i;
+      }
     }
 
     //The output is then a sum of the inputs
     //just return something to stop complaining
-    return similarity;
+    //TODO: This should actually be multiplied by the sign of closestValue!
+    return output[closestIndex];
   }
 
   private :

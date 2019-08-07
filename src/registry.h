@@ -6,6 +6,7 @@
 #include "model.h"
 #include "maker.h"
 
+//These should be deleted at program close, not doing that right now.
 void registerModels() {
   new Maker<MachineModelIfc, NearestNeighborModel>("NearestNeighborModel");
 }
