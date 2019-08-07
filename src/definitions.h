@@ -1,4 +1,5 @@
 #ifndef __DEFINITIONS_H
+#define __DEFINITIONS_H
 
 #include<vector>
 

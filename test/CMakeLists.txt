@@ -23,3 +23,6 @@ target_link_libraries(testNearestNeighbor ${OTHER_LIBS} ${Boost_LIBRARIES})
 
 add_executable(testRegistry testRegistry.cc)
 target_link_libraries(testRegistry ${OTHER_LIBS} ${Boost_LIBRARIES})
+
+add_executable(testAdvectionUpdater testAdvectionUpdater.cc)
+target_link_libraries(testAdvectionUpdater ${OTHER_LIBS} ${Boost_LIBRARIES})
