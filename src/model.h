@@ -3,6 +3,13 @@
 
 #include "definitions.h"
 
+class MachineModelIfc {
+  public :
+  MachineModelIfc() {
+
+  }
+};
+
 //Try and fit a line to the data - very bad for this problem so may need a kernel method
 class LinearLeastSquaresModel : public MachineModelIfc {
   public :
@@ -25,6 +32,10 @@ class LinearLeastSquaresModel : public MachineModelIfc {
 //work.
 class NearestNeighborModel : public MachineModelIfc {
   public :
+
+  NearestNeighborModel() {
+  }
+
   NearestNeighborModel(const NearestNeighborModel &obj) {
     this->features = obj.getExampleFeatures();
     this->output = obj.getExampleOutput();

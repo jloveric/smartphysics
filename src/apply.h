@@ -7,6 +7,7 @@
 
 #include "model.h"
 #include "definitions.h"
+#include "util.h"
 
 class ApplyModelIfc {
   public :
@@ -28,18 +29,12 @@ class ApplyLinearLeastSquares : public ApplyModelIfc {
   }
 
   Data apply(Data& v) override {
-
+    Data dummy;
+    return dummy;
   }
   private :
   ApplyLinearLeastSquares( const ApplyLinearLeastSquares &obj){}
   LinearLeastSquaresModel* model;
-};
-
-class MachineModelIfc {
-  public :
-  MachineModelIfc() {
-
-  }
 };
 
 class ApplyNearestNeighbor : public ApplyModelIfc {
@@ -62,37 +57,31 @@ class ApplyNearestNeighbor : public ApplyModelIfc {
     auto features = model->getExampleFeatures();
     auto output = model->getExampleOutput();
 
-    Data dotProduct;
-    dotProduct.resize(features.size());
+    Data similarity;
+    similarity.resize(features.size());
     
     //Not totally sure this is what I want.
     double absSum = 0;
 
+    double vv = dotProduct(v,v);
+
     for(auto i=0; i<features.size(); i++) {
-      dotProduct[i] = boost::dot_product(features, v);
-      absSum += std::abs(dotProduct[i]); 
+      similarity[i] = dotProduct(features[i], v)/vv;
+      absSum += std::abs(similarity[i]); 
     }
 
-    for(auto i=0; i<dotProduct.size(); i++) {
-      dotProduct[i]=dotProduct[i]/absSum;
+    for(auto i=0; i<similarity.size(); i++) {
+      similarity[i]=similarity[i]/absSum;
     }
 
     //The output is then a sum of the inputs
-    
-
+    //just return something to stop complaining
+    return similarity;
   }
 
   private :
   ApplyNearestNeighbor( const ApplyNearestNeighbor &obj){}
   NearestNeighborModel* model;
 };
-
-class MachineModelIfc {
-  public :
-  MachineModelIfc() {
-
-  }
-};
-
 
 #endif

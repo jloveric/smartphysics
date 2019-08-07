@@ -1,6 +1,6 @@
-#include "linearRegression.h"
-#include "logisticsRegression.h"
-#include "naiveBayes.h"
+#include "model.h"
+#include "apply.h"
+#include "learn.h"
 
 #include <iostream>
 

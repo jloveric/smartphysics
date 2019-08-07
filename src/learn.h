@@ -24,6 +24,8 @@ class LearnLinearLeastSquares : public LearnerIfc {
 
 class LearnNearestNeighbor : public LearnerIfc {
   public:
+    LearnNearestNeighbor() {}
+
     void Learn(const DataSet& features, const DataSet& output) override {
       //Fortunately learning for this model is the simplest possible!
       model.setExamples(features, output);
