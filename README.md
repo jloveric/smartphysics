@@ -6,12 +6,12 @@
 You need docker installed on your system.  Run the following in the main directory
 
 ```bash
-docker build -t kuiper .
+docker build -t smartphysics .
 ```
 run the image and use its console
 
 ```bash
-docker run -it kuiper bash
+docker run -it smartphysics bash
 ```
 run the tests
 ```
