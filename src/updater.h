@@ -9,13 +9,29 @@
  * relationships between the provided data.  In the cases of physics, this
  * might be distance between graph nodes (or time between nodes), etc...
  */
-template <class GRAPH>
 class UpdaterIfc {
   public :
   UpdaterIfc() {
   }
 
-  virtual void setGraph(GraphIfc* tGraph) {
+  virtual void setGraph(GraphIfc* tGraph) = 0;
+
+  virtual Data update(const DataSet& data) = 0;
+
+  private:
+
+};
+
+/**
+ * Base class adds template and basic implementation
+ */
+template <class GRAPH>
+class UpdaterBase : public UpdaterIfc {
+  public :
+  UpdaterBase() {
+  }
+
+  virtual void setGraph(GraphIfc* tGraph) override {
     graph = dynamic_cast<GRAPH*>(tGraph);
   }
 
@@ -29,21 +45,23 @@ class UpdaterIfc {
 /**
  * Brute force NBody solver
  */
-class UpdaterNBody : public UpdaterIfc<Graph1D> {
+class UpdaterNBody : public UpdaterBase<Graph1D> {
   public:
 
   UpdaterNBody() { 
   }
 
   Data update(const DataSet& data) override {
-
+    //some dummy data for now
+    Data temp;
+    return temp;
   }
 };
 
 /**
  * Advection equation solver
  */
-class UpdaterAdvectionEquation : public UpdaterIfc<Graph1D> {
+class UpdaterAdvectionEquation : public UpdaterBase<Graph1D> {
   public :
   UpdaterAdvectionEquation() {
   }

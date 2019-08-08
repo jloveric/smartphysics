@@ -4,6 +4,7 @@
 #include "apply.h"
 #include "learn.h"
 #include "model.h"
+#include "updater.h"
 #include "maker.h"
 
 //These should be deleted at program close, not doing that right now.
@@ -17,6 +18,11 @@ void registerLearners() {
 
 void registerApplys() {
   new Maker<ApplyModelIfc, ApplyNearestNeighbor>("ApplyNearestNeighbor");
+}
+
+void registerUpdaters() {
+  new Maker<UpdaterIfc, UpdaterAdvectionEquation>("AdvectionUpdater");
+  new Maker<UpdaterIfc, UpdaterNBody>("NBodyUpdater");
 }
 
 #endif
