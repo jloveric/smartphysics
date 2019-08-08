@@ -14,6 +14,7 @@ class GraphIfc {
   GraphIfc() {
 
   }
+  virtual ~GraphIfc() = default;
 };
 
 class Graph1D : public GraphIfc {

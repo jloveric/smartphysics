@@ -15,8 +15,8 @@ class UpdaterIfc {
   UpdaterIfc() {
   }
 
-  void setGraph(GRAPH* tGraph) {
-    graph = tGraph;
+  virtual void setGraph(GraphIfc* tGraph) {
+    graph = dynamic_cast<GRAPH*>(tGraph);
   }
 
   virtual Data update(const DataSet& data)=0;
