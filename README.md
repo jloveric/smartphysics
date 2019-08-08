@@ -13,8 +13,8 @@ run the image and use its console
 ```bash
 docker run -it kuiper bash
 ```
-run the experiment inside the container
+run the tests
 ```
-./kuiper
+make test
 ```
 
