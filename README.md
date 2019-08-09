@@ -17,4 +17,7 @@ run the tests
 ```
 make test
 ```
-
+run the main.cc
+```
+./smartphysics
+```

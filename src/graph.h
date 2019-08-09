@@ -17,14 +17,24 @@ class GraphIfc {
   virtual ~GraphIfc() = default;
 };
 
+/**
+ * Create a 1d grid with evenly spaced
+ * elements.
+ */
 class Graph1D : public GraphIfc {
   public :
+
+  /**
+   * Set the size of the grid
+   * @param elements is the number of elements in the grid
+   */
   void setSize(int elements) {
     graph.resize(elements);
   }
 
   private :
 
+  //The actual storage for the grid.
   std::vector<double> graph;
 };
 

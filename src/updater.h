@@ -14,8 +14,19 @@ class UpdaterIfc {
   UpdaterIfc() {
   }
 
+  /**
+   * Set the graph that will be used by the updater
+   * @param tGraph is a pointer to the graph
+   */
   virtual void setGraph(GraphIfc* tGraph) = 0;
 
+  /**
+   * Update with a given data set - this will contain
+   * at least the last state, but may also contain states before
+   * that.  
+   * @param data series of previous data sets
+   * @return the next state
+   */
   virtual Data update(const DataSet& data) = 0;
 
   private:

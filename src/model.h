@@ -28,8 +28,9 @@ class LinearLeastSquaresModel : public MachineModelIfc {
   Data coefficients;
 };
 
-//Directly store the patterns it's seen for prediction to perform similarity, this one will be slow, but it should
-//work.
+/**
+ * Nearest neighbor model is about the simplest to implement but expensive to evaluate and store (in this case).
+ */
 class NearestNeighborModel : public MachineModelIfc {
   public :
 

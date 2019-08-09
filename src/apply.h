@@ -9,12 +9,19 @@
 #include "definitions.h"
 #include "util.h"
 
+/**
+ * Given a model, and an input, evaluate that model with
+ * that input to produce the output
+ */
 class ApplyModelIfc {
   public :
-  ApplyModelIfc() {
+  ApplyModelIfc() {}
 
-  }
-
+  /**
+   * Apply the model to the data vector v
+   * @param v is the data vector
+   * @return the output of the model
+   */
   virtual Data apply(Data& v) = 0;
 
   private :
@@ -37,6 +44,9 @@ class ApplyLinearLeastSquares : public ApplyModelIfc {
   LinearLeastSquaresModel* model;
 };
 
+/**
+ * Brute force nearest neighbor model.
+ */
 class ApplyNearestNeighbor : public ApplyModelIfc {
   public :
   ApplyNearestNeighbor(){}
