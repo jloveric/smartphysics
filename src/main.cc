@@ -7,20 +7,28 @@
 
 #include "registry.h"
 
+/**
+ * Steps for creating a model based on a physics simulation.  In this
+ * case it's about as simple as can be.
+ */
 int main(void) {
 
-  registerModels();
-  registerLearners();
-  registerApplys();
-  registerUpdaters();
+  registerObjects();
 
-  //
+  //Create the grid
   auto graph = new Graph1D();
+
+  //Create the updater for the advection equation
   auto updater = getNew<UpdaterIfc>("AdvectionUpdater");
 
+  //Size the grid
   graph->setSize(100);
+
+  //Assign the grid to the updater
   updater->setGraph(graph);
 
+  //Create and set some initial conditions, create periodic
+  //sawteeth with period 10 units
   Data initialCondition;
   initialCondition.resize(100);
   
@@ -29,6 +37,8 @@ int main(void) {
     initialCondition[i]=i%10;
   }
 
+  //Create some training data by running the physics simulation
+  //and recording all the timesteps.
   DataSet ds, target;
   ds.push_back(initialCondition);
 
@@ -51,8 +61,6 @@ int main(void) {
   auto apply = new ApplyNearestNeighbor();
 
   learn->setModel(model);
-  apply->setModel(model);
-
   learn->learn(ds, target);
 
   Data test;
@@ -66,6 +74,7 @@ int main(void) {
   //This model won't be able to get the correct solution
   //for this problem, but it will try.  Next up, better models
   //and better physics.
+  apply->setModel(model);
   auto ans = apply->apply(test);
 
   std::for_each(ans.begin(), ans.end(), [] (auto element) {
@@ -73,4 +82,5 @@ int main(void) {
   });
   std::cout << "\n";
   
+  unRegister();
 }

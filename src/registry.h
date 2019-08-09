@@ -7,7 +7,8 @@
 #include "updater.h"
 #include "maker.h"
 
-//These should be deleted at program close, not doing that right now.
+//A pointer to the new object is stored in the maker::map, so something
+//still points to the targets.
 void registerModels() {
   new Maker<MachineModelIfc, NearestNeighborModel>("NearestNeighborModel");
 }
@@ -23,6 +24,20 @@ void registerApplys() {
 void registerUpdaters() {
   new Maker<UpdaterIfc, UpdaterAdvectionEquation>("AdvectionUpdater");
   new Maker<UpdaterIfc, UpdaterNBody>("NBodyUpdater");
+}
+
+void registerObjects() {
+  registerModels();
+  registerLearners();
+  registerApplys();
+  registerUpdaters();
+}
+
+void unRegister() {
+  clearMakerMap<MachineModelIfc>();
+  clearMakerMap<LearnerIfc>();
+  clearMakerMap<ApplyModelIfc>();
+  clearMakerMap<UpdaterIfc>();
 }
 
 #endif

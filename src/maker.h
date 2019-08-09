@@ -41,14 +41,16 @@ std::map<std::string, MakerBase<TBASE>*> MakerMap<TBASE>::map;
 
 template <class TBASE>
 void clearMakerMap() {
+  //delete the classes
   std::for_each(MakerMap<TBASE>::map.begin(), MakerMap<TBASE>::map.end(), [] (auto element) {
     delete element.second;
     element.second = nullptr;
   });
+  MakerMap<TBASE>::map.clear();
 }
 
 /**
- * Simple function for retrieving and object
+ * Simple function for retrieving an object
  * @param name is the name of the string of interest
  */
 template <class TBASE>
