@@ -4,6 +4,7 @@
 #include <boost/geometry/arithmetic/dot_product.hpp>
 #include <iostream>
 #include <cmath>
+#include <memory>
 
 #include "model.h"
 #include "definitions.h"
@@ -31,7 +32,7 @@ class ApplyModelIfc {
 //Not finished
 class ApplyLinearLeastSquares : public ApplyModelIfc {
   public :
-  void setModel(LinearLeastSquaresModel* thisModel) {
+  void setModel(std::shared_ptr<LinearLeastSquaresModel> thisModel) {
     model=thisModel;
   }
 
@@ -41,7 +42,7 @@ class ApplyLinearLeastSquares : public ApplyModelIfc {
   }
   private :
   ApplyLinearLeastSquares( const ApplyLinearLeastSquares &obj){}
-  LinearLeastSquaresModel* model;
+  std::shared_ptr<LinearLeastSquaresModel> model;
 };
 
 /**
@@ -51,8 +52,8 @@ class ApplyNearestNeighbor : public ApplyModelIfc {
   public :
   ApplyNearestNeighbor(){}
 
-  void setModel(NearestNeighborModel* thisModel) {
-    model=thisModel;
+  void setModel(std::shared_ptr<NearestNeighborModel> thisModel) {
+    model = thisModel;
   }
 
   Data apply(Data& v) override {
@@ -96,7 +97,7 @@ class ApplyNearestNeighbor : public ApplyModelIfc {
 
   private :
   ApplyNearestNeighbor( const ApplyNearestNeighbor &obj){}
-  NearestNeighborModel* model;
+  std::shared_ptr<NearestNeighborModel> model;
 };
 
 #endif

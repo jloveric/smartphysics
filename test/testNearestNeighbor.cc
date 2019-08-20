@@ -1,6 +1,7 @@
 #define BOOST_TEST_MODULE testNearestNeighbor
 #include <boost/test/unit_test.hpp>
 #include <iostream>
+#include <memory>
 
 #include "definitions.h"
 #include "model.h"
@@ -9,9 +10,9 @@
 
 BOOST_AUTO_TEST_CASE(TestNearestNeighbor) {
   
-  auto model = new NearestNeighborModel();
-  auto learn = new LearnNearestNeighbor();
-  auto apply = new ApplyNearestNeighbor();
+  auto model = std::make_shared<NearestNeighborModel>();
+  auto learn = std::make_shared<LearnNearestNeighbor>();
+  auto apply = std::make_shared<ApplyNearestNeighbor>();
 
   learn->setModel(model);
   apply->setModel(model);

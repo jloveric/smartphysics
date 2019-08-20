@@ -1,6 +1,8 @@
 #ifndef __LEARN_H
 #define __LEARN_H
 
+#include<memory>
+
 #include "definitions.h"
 #include "model.h"
 
@@ -54,14 +56,13 @@ class LearnNearestNeighbor : public LearnerIfc {
       }
     }
 
-    void setModel(NearestNeighborModel* tModel) {
+    void setModel(std::shared_ptr<NearestNeighborModel> tModel) {
       model = tModel;
     }
 
   private:
 
-  //Should not be deleted
-  NearestNeighborModel* model;
+  std::shared_ptr<NearestNeighborModel> model;
 };
 
 #endif

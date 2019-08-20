@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "model.h"
 #include "apply.h"
 #include "learn.h"
@@ -16,7 +18,7 @@ int main(void) {
   registerObjects();
 
   //Create the grid
-  auto graph = new Graph1D();
+  auto graph = std::make_shared<Graph1D>();
 
   //Create the updater for the advection equation
   auto updater = getNew<UpdaterIfc>("AdvectionUpdater");
@@ -56,9 +58,9 @@ int main(void) {
   ds.erase(ds.end());
 
   //Now train with a very simple approach
-  auto model = new NearestNeighborModel();
-  auto learn = new LearnNearestNeighbor();
-  auto apply = new ApplyNearestNeighbor();
+  auto model = std::make_shared<NearestNeighborModel>();
+  auto learn = std::make_shared<LearnNearestNeighbor>();
+  auto apply = std::make_shared<ApplyNearestNeighbor>();
 
   learn->setModel(model);
   learn->learn(ds, target);

@@ -2,6 +2,7 @@
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 #include <cmath>
+#include <memory>
 
 #include "definitions.h"
 #include "updater.h"
@@ -9,8 +10,8 @@
 
 BOOST_AUTO_TEST_CASE(TestAdvectionUpdater) {
   
-  auto graph = new Graph1D();
-  auto updater = new UpdaterAdvectionEquation();
+  auto graph = std::make_shared<Graph1D>();
+  auto updater = std::make_shared<UpdaterAdvectionEquation>();
   
   graph->setSize(100);
   updater->setGraph(graph);

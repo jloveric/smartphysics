@@ -18,7 +18,7 @@ class UpdaterIfc {
    * Set the graph that will be used by the updater
    * @param tGraph is a pointer to the graph
    */
-  virtual void setGraph(GraphIfc* tGraph) = 0;
+  virtual void setGraph(std::shared_ptr<GraphIfc> tGraph) = 0;
 
   /**
    * Update with a given data set - this will contain
@@ -42,15 +42,15 @@ class UpdaterBase : public UpdaterIfc {
   UpdaterBase() {
   }
 
-  virtual void setGraph(GraphIfc* tGraph) override {
-    graph = dynamic_cast<GRAPH*>(tGraph);
+  virtual void setGraph(std::shared_ptr<GraphIfc> tGraph) override {
+    graph = std::dynamic_pointer_cast<GRAPH>(tGraph);
   }
 
   virtual Data update(const DataSet& data)=0;
 
   private:
 
-  GRAPH* graph;
+  std::shared_ptr<GRAPH> graph;
 };
 
 /**
