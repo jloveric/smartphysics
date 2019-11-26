@@ -10,6 +10,7 @@ find_package (Boost REQUIRED COMPONENTS system filesystem unit_test_framework da
 find_package (OpenMP REQUIRED)
 
 
+## All this just to get the variables right.  Ouch
 execute_process(COMMAND which mpicc OUTPUT_VARIABLE CMAKE_C_COMPILER)
 execute_process(COMMAND which mpif90 OUTPUT_VARIABLE CMAKE_Fortran_COMPILER)
 execute_process(COMMAND which mpiCC OUTPUT_VARIABLE CMAKE_CXX_COMPILER)
@@ -18,11 +19,9 @@ string(STRIP ${CMAKE_C_COMPILER} CMAKE_C_COMPILER)
 string(STRIP ${CMAKE_CXX_COMPILER} CMAKE_CXX_COMPILER)
 string(STRIP ${CMAKE_Fortran_COMPILER} CMAKE_Fortran_COMPILER)
 
-message("random message")
 message("compiler ${CMAKE_C_COMPILER}")
 message("compiler ${CMAKE_CXX_COMPILER}")
 message("compiler ${CMAKE_Fortran_COMPILER}")
-
 
 
 if(OPENMP_FOUND)

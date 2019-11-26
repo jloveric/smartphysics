@@ -5,7 +5,7 @@
 #include<vector>
 #include "definitions.h"
 #include "Mesh.hh"
-#include "MechFactory.hh"
+#include "MeshFactory.hh"
 
 /**
  * This is the graph that the data sets on.  In the case of physics
