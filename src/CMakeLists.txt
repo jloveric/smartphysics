@@ -1,19 +1,21 @@
 cmake_minimum_required (VERSION 2.6)
 
-#list( APPEND CMAKE_CXX_FLAGS "-std=c++11 -O3 -fopenmp ${CMAKE_CXX_FLAGS}")
+INCLUDE_DIRECTORIES(
+${PROJECT_SOURCE_DIR}/src
+${PROJECT_SOURCE_DIR}/jali/inst-jali/include
+${PROJECT_SOURCE_DIR}/jali/inst-tpl/include
+)
 
-
-#find_package(Boost COMPONENTS math_c99)
-#find_package(BoostCompute)
-
-find_package(Boost COMPONENTS)
-include_directories(${Boost_INCLUDE_DIRS})
+link_directories(
+${PROJECT_SOURCE_DIR}/src
+${PROJECT_SOURCE_DIR}/jali/inst-jali/lib
+${PROJECT_SOURCE_DIR}/jali/inst-tpl/lib
+)
 
 message(STATUS "Source Boost include directories: " ${Boost_INCLUDE_DIRS})
 message(STATUS "Source Boost libs: " ${Boost_LIBRARIES})
 
-#set(CMAKE_CXX_FLAGS "-O3 -march=native --std=c++17 ${CMAKE_CXX_FLAGS}")
-set(CMAKE_CXX_FLAGS "-g -march=native --std=c++2a -fmodules ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "-g -march=native --std=c++2a ${CMAKE_CXX_FLAGS}")
 add_library (
   smart
   SHARED

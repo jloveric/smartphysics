@@ -4,9 +4,9 @@ project(smartphysics)
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
 
-set(Boost_USE_MULTITHREADED      ON)
-set(Boost_USE_STATIC_LIBS OFF)
-find_package (Boost REQUIRED COMPONENTS system filesystem unit_test_framework date_time regex log thread)
+#set(Boost_USE_MULTITHREADED      ON)
+#set(Boost_USE_STATIC_LIBS OFF)
+find_package (Boost REQUIRED COMPONENTS unit_test_framework)
 find_package (OpenMP REQUIRED)
 
 
@@ -23,6 +23,26 @@ message("compiler ${CMAKE_C_COMPILER}")
 message("compiler ${CMAKE_CXX_COMPILER}")
 message("compiler ${CMAKE_Fortran_COMPILER}")
 
+set(OTHER_LIBS 
+ smart error_handling geometry mesh simple_mesh mstk_mesh
+ boost_filesystem
+ boost_graph
+ boost_program_options
+ boost_regex
+ boost_system
+ exodus
+ exoIIv2for
+ hdf5
+ hdf5_hl
+ hdf5_tools
+ metis
+ mstk
+ netcdf
+ UnitTest++
+ z
+ mesh_factory jali_state
+)
+
 
 if(OPENMP_FOUND)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
@@ -35,6 +55,7 @@ include_directories(src jali/inst-jali/include)
 add_subdirectory(src)
 add_subdirectory(test)
 add_executable(smartphysics src/main.cc)
+target_link_libraries(smartphysics error_handling geometry jali_state mesh_factory mesh mstk_mesh)
 
 enable_testing()
 add_test(testNearestNeighbor test/testNearestNeighbor)

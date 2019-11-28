@@ -8,17 +8,21 @@
 #include <algorithm>
 
 #include "registry.h"
+#include "mpi.h"
 
 /**
  * Steps for creating a model based on a physics simulation.  In this
  * case it's about as simple as can be.
  */
-int main(void) {
+int main(int argc, char* argv[]) {
+
+  MPI_Init(&argc, &argv);
+  MPI_Comm comm = MPI_COMM_WORLD;
 
   registerObjects();
 
   //Create the grid
-  auto graph = std::make_shared<Graph1D>();
+  auto graph = std::make_shared<Graph1D>(comm);
 
   //Create the updater for the advection equation
   auto updater = getNew<UpdaterIfc>("AdvectionUpdater");
@@ -85,4 +89,6 @@ int main(void) {
   std::cout << "\n";
   
   unRegister();
+
+  MPI_Finalize();
 }

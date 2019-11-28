@@ -48,7 +48,7 @@ class UpdaterBase : public UpdaterIfc {
 
   virtual Data update(const DataSet& data)=0;
 
-  private:
+  protected:
 
   std::shared_ptr<GRAPH> graph;
 };
@@ -78,6 +78,10 @@ class UpdaterAdvectionEquation : public UpdaterBase<Graph1D> {
   }
 
   Data update(const DataSet& data) override {
+
+    //lets print out the graph to make sure things are really working
+
+
     //OK, I'm gonna cheat for demo purposes and just shift the data
     Data last;
     last.resize(data.back().size());
