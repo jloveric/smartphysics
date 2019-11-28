@@ -24,7 +24,7 @@ message("compiler ${CMAKE_CXX_COMPILER}")
 message("compiler ${CMAKE_Fortran_COMPILER}")
 
 set(OTHER_LIBS 
- smart error_handling geometry mesh simple_mesh mstk_mesh
+ smart error_handling geometry mesh mstk_mesh simple_mesh 
  boost_filesystem
  boost_graph
  boost_program_options

@@ -3,8 +3,9 @@ cmake_minimum_required(VERSION 3.0.0)
 MESSAGE( STATUS "Boost paths:         " ${Boost_LIBRARIES} )
 
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src)
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/jali/inst-jali/include)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/jali/inst-tpl/include)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/jali/inst-jali/include)
+
 
 MESSAGE( "PROJECT SOURCE " ${PROJECT_SOURCE_DIR})
 
@@ -12,8 +13,8 @@ GET_DIRECTORY_PROPERTY(output INCLUDE_DIRECTORIES)
 MESSAGE(WARNING ${output})
 
 link_directories(${PROJECT_SOURCE_DIR}/src)
-link_directories(${PROJECT_SOURCE_DIR}/jali/inst-jali/lib)
 link_directories(${PROJECT_SOURCE_DIR}/jali/inst-tpl/lib)
+link_directories(${PROJECT_SOURCE_DIR}/jali/inst-jali/lib)
 
 #link_directories(jali/inst-jali/lib)
 #include_directories(src jali/inst-jali/include)
@@ -23,7 +24,7 @@ link_directories(${PROJECT_SOURCE_DIR}/jali/inst-tpl/lib)
 #-L/home/john/KUIPER/jali/inst-tpl/lib -lmstk -lmesh_factory -ljali_state
 
 set(THESE_LIBS 
- error_handling geometry simple_mesh mesh mstk_mesh
+ error_handling geometry mesh simple_mesh mstk_mesh
  boost_filesystem
  boost_graph
  boost_program_options
