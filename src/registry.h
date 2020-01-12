@@ -33,11 +33,4 @@ void registerObjects() {
   registerUpdaters();
 }
 
-void unRegister() {
-  clearMakerMap<MachineModelIfc>();
-  clearMakerMap<LearnerIfc>();
-  clearMakerMap<ApplyModelIfc>();
-  clearMakerMap<UpdaterIfc>();
-}
-
 #endif

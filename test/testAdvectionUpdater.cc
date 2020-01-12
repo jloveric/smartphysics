@@ -15,12 +15,12 @@ BOOST_AUTO_TEST_CASE(TestAdvectionUpdater) {
   MPI_Init(NULL, NULL);
   MPI_Comm comm = MPI_COMM_WORLD;
 
-  auto graph = std::make_shared<Graph1D>(comm);
+  /*auto graph = std::make_shared<Graph1D>(comm);
   auto updater = std::make_shared<UpdaterAdvectionEquation>();
   
   graph->setSize(100);
   graph->initMesh(0.0, 100.0, 10);
-  /*updater->setGraph(graph);
+  updater->setGraph(graph);
   
   Data d, f;
   d.resize(10);

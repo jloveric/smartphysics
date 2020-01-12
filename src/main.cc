@@ -87,8 +87,6 @@ int main(int argc, char* argv[]) {
     std::cout << " " << element;
   });
   std::cout << "\n";
-  
-  unRegister();
 
   MPI_Finalize();
 }

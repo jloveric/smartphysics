@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
+#include <memory>
 
 /**
  * Base class for creating new objects
@@ -20,7 +21,7 @@ class MakerBase
   /**
    * Get a pointer to the object
    */
-  virtual TBASE* get() = 0;
+  virtual std::shared_ptr<TBASE> get() = 0;
 
   private:
 };
@@ -32,29 +33,19 @@ template <class TBASE>
 class MakerMap
 {
   public:
-  static std::map<std::string, MakerBase<TBASE>*> map;
+  static std::map<std::string, std::shared_ptr<MakerBase<TBASE>>> map;
 };
 
 
 template <class TBASE>
-std::map<std::string, MakerBase<TBASE>*> MakerMap<TBASE>::map;
-
-template <class TBASE>
-void clearMakerMap() {
-  //delete the classes
-  std::for_each(MakerMap<TBASE>::map.begin(), MakerMap<TBASE>::map.end(), [] (auto element) {
-    delete element.second;
-    element.second = nullptr;
-  });
-  MakerMap<TBASE>::map.clear();
-}
+std::map<std::string, std::shared_ptr<MakerBase<TBASE>>> MakerMap<TBASE>::map;
 
 /**
  * Simple function for retrieving an object
  * @param name is the name of the string of interest
  */
 template <class TBASE>
-TBASE* getNew(std::string name)
+std::shared_ptr<TBASE> getNew(std::string name)
 {
   if (MakerMap<TBASE>::map.find(name) == MakerMap<TBASE>::map.end()) {
 
@@ -66,7 +57,7 @@ TBASE* getNew(std::string name)
     throw;
   }
 
-  TBASE* result = MakerMap<TBASE>::map[name]->get();
+  auto result = MakerMap<TBASE>::map[name]->get();
   if (result == nullptr) {
     std::cout << "getNew object name " << name << " not found\n";
     throw;
@@ -89,7 +80,7 @@ class Maker : public MakerBase<TBASE>
   {
     name = thisName;
     MakerMap<TBASE> a;
-    a.map[name] = this;
+    a.map[name] = std::shared_ptr<Maker>(this);
   }
 
   /**
@@ -103,9 +94,9 @@ class Maker : public MakerBase<TBASE>
   /**
    * @return handoff a pointer to the object
    */
-  TBASE* get() override
+  std::shared_ptr<TBASE> get() override
   {
-    return new T;
+    return std::make_shared<T>();
   }
 
   private:
